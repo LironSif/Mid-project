@@ -113,7 +113,7 @@ export const hazardInformation = {
         HEALTH_HAZARD: 3,
         STATE: "Solid", 
         OXIDIZER: true, 
-        CORROSIVE: true,
+        CORROSIVE: false,
         FLAMMABLE : true
         // need to fix data
       },

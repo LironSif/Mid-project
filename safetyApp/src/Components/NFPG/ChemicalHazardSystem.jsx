@@ -3,6 +3,7 @@ import { Box, Button, Modal, Paper, TextField, Typography } from "@mui/material"
 import { chemicals, hazardInformation } from "./ChemicalData.js";
 import DiamondPart from "../DiamondParts/DiamondPart .jsx";
 
+
 const ChemicalHazardSystem = ({ addCard }) => {
   const [chemicalData, setChemicalData] = useState({});
   const [open, setOpen] = useState(false);

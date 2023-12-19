@@ -41,6 +41,9 @@ const Identifier = () => {
   const [cards, setCards] = useState({});
   const { mockUserData, updateApiUserChemicals } = useUserData();
 
+
+
+  
   useEffect(() => {
     if (!mockUserData) return;
     console.log("Chemicals in mockUserData:", mockUserData.chemicals); // Debugging
