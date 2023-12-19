@@ -24,7 +24,8 @@ import MaterialItem from "../../Components/Material/MaterialItem.jsx";
 import Shelf from "../../Components/Shelf/Shelf.jsx";
 import { useUserData } from "../../UserDataContext.jsx";
 import CircularGauge from "../../Components/Gauge/CircularGauge.jsx";
-import QuantityModal from "./QuantityModal.jsx";
+import { useTheme, useMediaQuery } from '@mui/material';
+
 
 const Dashboard = () => {
   const [addedChemicals, setAddedChemicals] = useState([]);
@@ -33,6 +34,9 @@ const Dashboard = () => {
   const [currentShelfIndex, setCurrentShelfIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentItem, setCurrentItem] = useState(null);
+  const theme = useTheme();
+const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+
   const { mockUserData, updateApiUserChemicals, updateShelfConfig } =
     useUserData();
   const chemicalsArray = mockUserData
@@ -298,7 +302,7 @@ const Dashboard = () => {
             Material organizer
           </Typography>
           <Box
-            sx={{ display: "flex", justifyContent: "space-between", gap: 2 }}
+            sx={{ display: "flex",flexDirection: isSmallScreen ? 'column' : 'row',justifyContent: "space-between", gap: 2 }}
           >
             <div className="material-list">
               {Object.values(mockUserData.chemicals).map((el, i) => (

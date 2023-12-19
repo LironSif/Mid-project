@@ -1,49 +1,87 @@
 import React from "react";
-import { AppBar, Toolbar, Button, Typography, Box } from '@mui/material';
+import { AppBar, Toolbar, Button, Typography, Box, IconButton, Drawer, useTheme, useMediaQuery } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 import { NavLink, useNavigate } from "react-router-dom";
 import { useUserData } from "../../UserDataContext";
 import { auth } from '../../Auth/firebase.jsx';
 
-
 const Nav = () => {
-  const { isLogin, logOut } = useUserData();
+  const { isLogin, logOut, mockUserData } = useUserData();
   const navigate = useNavigate();
-  const {mockUserData} = useUserData()
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  const [drawerOpen, setDrawerOpen] = React.useState(false);
 
-console.log(mockUserData)
-  
   const handleLogout = async () => {
     await logOut();
     navigate('/');
   };
 
+  const buttonStyle = {
+    color: 'inherit',
+    component: NavLink,
+    sx: {
+      ':hover': {
+        borderColor: 'white',
+        borderWidth: '1px',
+        borderStyle: 'solid',
+        borderRadius: '1px'
+      }
+    }
+  };
+
+  const renderMenuLinks = () => (
+    <>
+      <Button {...buttonStyle} to="/Dashboard">Dashboard</Button>
+      <Button {...buttonStyle} to="/Identifier">Identifier</Button>
+      <Button {...buttonStyle} to="/Contact">Contact Us</Button>
+    </>
+  );
+
   return (
     <AppBar position="static">
       <Toolbar>
-        {/* Logo  */}
-        <Typography variant="h6" sx={{ flexGrow: 1 }}>
-          <Button color="inherit" component={NavLink} to="/Home">Home</Button>
-        </Typography>
+        {/* Mobile Menu Icon */}
+        {isSmallScreen && (
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            onClick={() => setDrawerOpen(true)}
+          >
+            <MenuIcon />
+          </IconButton>
+        )}
 
-        
-        <Box sx={{ flexGrow: 2, display: 'flex', justifyContent: 'center' }}>
-          <Button color="inherit" component={NavLink} to="/Dashboard">Dashboard</Button>
-          <Button color="inherit" component={NavLink} to="/Identifier">Identifier</Button>
-          <Button color="inherit" component={NavLink} to="/Contact">Contact Us</Button>
+        {/* Left-aligned Links */}
+        <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'flex-start' }}>
+          <Button {...buttonStyle} to="/Home">Home</Button>
+          {!isSmallScreen && renderMenuLinks()}
         </Box>
 
+        {/* Mobile Drawer for Links */}
+        {isSmallScreen && (
+          <Drawer
+            anchor="left"
+            open={drawerOpen}
+            onClose={() => setDrawerOpen(false)}
+          >
+            {renderMenuLinks()}
+          </Drawer>
+        )}
+
+        {/* Auth Buttons */}
         {isLogin ? (
-          <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'flex-end' }}>
+          <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
             <Typography variant="h6" sx={{ marginRight: 2 }}>
-            {`Hi,  ${auth.currentUser.email}`}
-            {/* ${mockUserData.name ? mockUserData.name : */}
+            {`Hi, ${mockUserData?.name ? mockUserData.name : auth.currentUser?.email}`}
             </Typography>
             <Button color="inherit" onClick={handleLogout}>Logout</Button>
           </Box>
         ) : (
-          <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'flex-end' }}>
-            <Button color="inherit" component={NavLink} to="/Login">Login</Button>
-            <Button color="inherit" component={NavLink} to="/SignUp">Signup</Button>
+          <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <Button {...buttonStyle} to="/Login">Login</Button>
+            <Button {...buttonStyle} to="/SignUp">Signup</Button>
           </Box>
         )}
       </Toolbar>
