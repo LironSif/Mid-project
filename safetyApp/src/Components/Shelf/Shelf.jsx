@@ -1,6 +1,6 @@
 import React from "react";
 import ShelfCell from "../ShelfCell/ShelfCell.jsx";
-import "./Shelf.css";
+import "./shelf.css";
 
 const Shelf = () => {
   const handleDrop = (cellId, state) => {
