@@ -23,7 +23,7 @@ const ShelfCell = React.memo(({ cellId, content, onDropItem }) => {
       case "Liquid":
         return <LiquidIcon style={{ color: "blue", fontSize: "1.5rem" }} />;
       case "Solid":
-        return <SolidIcon style={{ color: "gray", fontSize: "1.5rem" }} />;
+        return <SolidIcon style={{ color: "black", fontSize: "1.5rem" }} />;
       default:
         return null;
     }
