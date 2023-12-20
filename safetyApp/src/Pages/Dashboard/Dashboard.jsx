@@ -197,7 +197,7 @@ const Dashboard = () => {
       <Box sx={{ flexGrow: 1, mt: 8, mx: 4 }}>
         {/* Header */}
         <Box sx={{ display: "flex", justifyContent: "center", mb: 4 }}>
-          <Typography color="primary.dark" variant="h2">
+          <Typography color="primary.dark" variant="h1">
             Dashboard Overview
           </Typography>
         </Box>
@@ -209,6 +209,7 @@ const Dashboard = () => {
             justifyContent: "space-around",
             flexWrap: "wrap",
             mb: 4,
+            mt: 12
           }}
         >
           <CircularGauge
@@ -241,12 +242,12 @@ const Dashboard = () => {
             flexWrap: "wrap",
             gap: 10,
             justifyContent: "center",
-            alignItems: "flex-start",
-            mb: 10,
-            mt: 10,
+            alignItems: "center",
+            mb: 12,
+            mt: 20,
           }}
         >
-          <Typography variant="h4">
+          <Typography variant="h3">
             Hazardous Material Storage Recommendations
           </Typography>
           <Box
@@ -291,12 +292,13 @@ const Dashboard = () => {
           sx={{
             display: "flex",
             flexDirection: "column",
-            alignItems: "flex-start",
+            alignItems: "center",
             justifyContent: "center",
             gap: 2,
+            mb: 4
           }}
         >
-          <Typography variant="h4" sx={{ mb: 2 }}>
+          <Typography variant="h2" sx={{ mb: 2 }}>
             Material organizer
           </Typography>
           <Box
@@ -304,7 +306,7 @@ const Dashboard = () => {
               display: "flex",
               flexDirection: isSmallScreen ? "column" : "row",
               justifyContent: "space-between",
-              gap: 2,
+              gap: 4,
             }}
           >
             <div className="material-list">

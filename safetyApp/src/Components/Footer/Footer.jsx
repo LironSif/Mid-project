@@ -10,7 +10,7 @@ const Footer = () => {
         px: 2,
         mt: 'auto',
         backgroundColor: 'secondary.light',
-        display: 'flex', // Set display to flex
+        display: 'flex', 
         justifyContent: 'center', // Center the content
       }}
     >
@@ -20,7 +20,7 @@ const Footer = () => {
         </Typography>
         <div>
           <Typography variant="body2" color="white">
-            © {new Date().getFullYear()} Your Company Name
+            © {new Date().getFullYear()} SIFADOTEC LTD
           </Typography>
       
         </div>
