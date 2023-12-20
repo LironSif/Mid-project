@@ -30,6 +30,21 @@ const Nav = () => {
     }
   };
 
+  const logoutButtonStyle = {
+    sx: {
+      backgroundColor: theme.palette.secondary.dark, 
+      borderRadius:"10px",
+      color:"white",
+      ':hover': {
+        backgroundColor: theme.palette.primary.dark, // Darker shade on hover
+        borderColor: 'white',
+        borderWidth: '1px',
+        borderStyle: 'solid',
+        borderRadius:"10px",
+      }
+    }
+  };
+
   const renderMenuLinks = () => (
     <>
       <Button {...buttonStyle} to="/Dashboard">Dashboard</Button>
@@ -74,9 +89,9 @@ const Nav = () => {
         {isLogin ? (
           <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
             <Typography variant="h6" sx={{ marginRight: 2 }}>
-            {`Hi, ${mockUserData?.name ? mockUserData.name : auth.currentUser?.email}`}
+              {`Hi, ${mockUserData?.name ? mockUserData.name : auth.currentUser?.email}`}
             </Typography>
-            <Button color="inherit" onClick={handleLogout}>Logout</Button>
+            <Button {...logoutButtonStyle} onClick={handleLogout}>Logout</Button>
           </Box>
         ) : (
           <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>

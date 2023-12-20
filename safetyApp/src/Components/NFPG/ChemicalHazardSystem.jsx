@@ -1,31 +1,26 @@
 import React, { useState } from "react";
-import { Box, Button, Modal, Paper, TextField, Typography } from "@mui/material";
+import { Box, Button, Modal, Paper, TextField, Typography, useTheme, useMediaQuery, Select, MenuItem, FormControl, InputLabel } from "@mui/material";
 import { chemicals, hazardInformation } from "./ChemicalData.js";
-import DiamondPart from "../DiamondParts/DiamondPart .jsx";
 
+import DiamondPart from "../DiamondParts/DiamondPart .jsx"
 
 const ChemicalHazardSystem = ({ addCard }) => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
   const [chemicalData, setChemicalData] = useState({});
   const [open, setOpen] = useState(false);
   const [quantity, setQuantity] = useState(1);
+  const [selectedUN, setSelectedUN] = useState('');
 
-  const handleSearch = (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      const unNumber = "UN" + e.target.value.padStart(4, "0");
-      const data = chemicals[unNumber];
-
-      if (data) {
-        setChemicalData(data);
-      } else {
-        setChemicalData({});
-        alert("No data found for number " + e.target.value);
-      }
-    }
+  const handleSelectChange = (event) => {
+    const unNumber = event.target.value;
+    setSelectedUN(unNumber);
+    const data = chemicals[unNumber];
+    setChemicalData(data || {});
   };
 
   const handleAdd = () => {
-    
     if (quantity > 0) {
       const newCardData = {
         ...chemicalData,
@@ -51,27 +46,90 @@ const ChemicalHazardSystem = ({ addCard }) => {
   };
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", m: 2, gap: "20px" }}>
-      <Typography variant="h4" sx={{ mt: 2, mb: 2, fontWeight: "bold", color: "#333" }}>
+    <Box sx={{
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      m: 2,
+      marginBottom: 4,
+      gap: isMobile ? "10px" : "20px"
+    }}>
+      <Typography variant="h4" sx={{
+        mt: 2,
+        mb: 2,
+        fontWeight: "bold",
+        color: theme.palette.secondary.dark,
+        fontSize: isMobile ? '1.5rem' : '2rem'
+        
+      }}>
         Chemical Hazard Identification System
       </Typography>
-      <TextField label="Enter UN number" variant="outlined" onKeyDown={handleSearch} sx={{ mb: 2, width: "50%" }} />
-      <Typography variant="h6" sx={{ mt: 2, mb: 2, color: "#333", fontWeight: "bold" }}>
+
+      <FormControl fullWidth sx={{ mb: 1, width: isMobile ? "60%" : "30%" }}>
+        <InputLabel id="un-number-select-label">Select UN Number</InputLabel>
+        <Select
+          labelId="un-number-select-label"
+          id="un-number-select"
+          value={selectedUN}
+          label="Select UN Number"
+          onChange={handleSelectChange}
+        >
+          {Object.keys(chemicals).map((unNumber) => (
+            <MenuItem key={unNumber} value={unNumber}>
+              {unNumber} - {chemicals[unNumber].Name}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+
+      <Typography variant="h6" sx={{
+        mt: 2,
+        mb: 2,
+        color: "#333",
+        fontWeight: "bold",
+        fontSize: isMobile ? '1rem' : '1.25rem'
+      }}>
         {chemicalData.Name || "No name available."}
       </Typography>
-      <Paper sx={{ position: "relative", width: 250, height: 250, mt: 2, mb: 2 }} elevation={0}>
+
+      <Paper sx={{
+        position: "relative",
+        width: isMobile ? 200 : 250,
+        height: isMobile ? 200 : 250,
+        mt: 2,
+        mb: isMobile ? 4 : 2
+      }} elevation={0}>
         <DiamondPart color="red" text={hazardInformation.FIRE_HAZARD[chemicalData.FIRE_HAZARD]} position={{ top: 0, left: "50%", transform: "translateX(-50%) rotate(45deg)" }} />
         <DiamondPart color="blue" text={hazardInformation.HEALTH_HAZARD[chemicalData.HEALTH_HAZARD]} position={{ left: 0, top: "50%", transform: "translateY(-50%) rotate(45deg)" }} />
         <DiamondPart color="yellow" text={hazardInformation.INSTABILITY[chemicalData.INSTABILITY]} position={{ right: 0, top: "50%", transform: "translateY(-50%) rotate(45deg)" }} />
         <DiamondPart color="white" text={chemicalData.SPECIFIC_HAZARD || 'N/A'} position={{ bottom: 0, left: "50%", transform: "translateX(-50%) rotate(45deg)" }} />
       </Paper>
-      <Button style={{ backgroundColor: "#607ff0", color: "#FFF" }} variant="contained" onClick={() => setOpen(true)} sx={{ mx: 2 }}>
+
+      <Button
+        style={{ backgroundColor: "#607ff0", color: "#FFF", marginTop: isMobile ? 4 : 2, marginBottom: isMobile ? 4 : 4 }}
+        variant="contained"
+        onClick={() => setOpen(true)}
+      >
         Add to Warehouse
       </Button>
-      <Modal open={open} onClose={() => setOpen(false)} aria-labelledby="modal-title" aria-describedby="modal-description">
+
+      <Modal
+        open={open}
+        onClose={() => setOpen(false)}
+        aria-labelledby="modal-title"
+        aria-describedby="modal-description"
+      >
         <Box sx={modalStyle}>
           <Typography id="modal-title" variant="h6" component="h2">Enter Quantity</Typography>
-          <TextField label="Quantity" type="number" value={quantity} onChange={(e) => setQuantity(parseInt(e.target.value))} fullWidth margin="normal" inputProps={{ min: 0, step: 1 }} />
+          <TextField
+            label="Quantity"
+            type="number"
+            value={quantity}
+            onChange={(e) => setQuantity(parseInt(e.target.value))}
+            fullWidth
+            margin="normal"
+            inputProps={{ min: 0, step: 1 }}
+          />
           <Button onClick={handleAdd} variant="contained" sx={{ mt: 2 }}>Add to Warehouse</Button>
         </Box>
       </Modal>

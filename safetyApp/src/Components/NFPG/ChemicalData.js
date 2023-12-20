@@ -117,5 +117,64 @@ export const hazardInformation = {
         FLAMMABLE : true
         // need to fix data
       },
-  };
+      UN1005: {
+        Name: "Ammonia, anhydrous",
+        INSTABILITY: 1,
+        SPECIFIC_HAZARD: "Corrosive",
+        FIRE_HAZARD: 1,
+        HEALTH_HAZARD: 3,
+        STATE: "Gas",
+        OXIDIZER: false,
+        CORROSIVE: true,
+        FLAMMABLE: true
+      },
+      UN1017: {
+        Name: "Chlorine",
+        INSTABILITY: 0,
+        SPECIFIC_HAZARD: "Oxidizer",
+        FIRE_HAZARD: 0,
+        HEALTH_HAZARD: 3,
+        STATE: "Gas",
+        OXIDIZER: true,
+        CORROSIVE: true,
+        FLAMMABLE: false
+      },
+      UN1090: {
+        Name: "Acetone",
+        INSTABILITY: 1,
+        SPECIFIC_HAZARD: "None",
+        FIRE_HAZARD: 3,
+        HEALTH_HAZARD: 1,
+        STATE: "Liquid",
+        OXIDIZER: false,
+        CORROSIVE: false,
+        FLAMMABLE: true
+      },
+      UN1202: {
+        Name: "Diesel fuel",
+        INSTABILITY: 0,
+        SPECIFIC_HAZARD: "None",
+        FIRE_HAZARD: 2,
+        HEALTH_HAZARD: 2,
+        STATE: "Liquid",
+        OXIDIZER: false,
+        CORROSIVE: false,
+        FLAMMABLE: true
+      },
+      UN1824: {
+        Name: "Sodium hydroxide solution",
+        INSTABILITY: 0,
+        SPECIFIC_HAZARD: "Corrosive",
+        FIRE_HAZARD: 0,
+        HEALTH_HAZARD: 3,
+        STATE: "Liquid",
+        OXIDIZER: false,
+        CORROSIVE: true,
+        FLAMMABLE: false
+      }
+    }
+
+  
+  export default hazardInformation;
+
   

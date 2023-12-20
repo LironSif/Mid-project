@@ -17,7 +17,7 @@ import {
 import FlameIcon from "@mui/icons-material/Whatshot";
 import CorrosiveIcon from "@mui/icons-material/Warning";
 import OxidizerIcon from "@mui/icons-material/AcUnit";
-import GasIcon from "@mui/icons-material/Cloud";
+import GasIcon from "@mui/icons-material/Cloud"; 
 import LiquidIcon from "@mui/icons-material/Opacity";
 import SolidIcon from "@mui/icons-material/Drafts";
 import MaterialItem from "../../Components/Material/MaterialItem.jsx";
@@ -28,7 +28,7 @@ import { useTheme, useMediaQuery } from '@mui/material';
 
 
 const Dashboard = () => {
-  const [addedChemicals, setAddedChemicals] = useState([]);
+
   const [cards, setCards] = useState({});
   const [numberOfShelves, setNumberOfShelves] = useState(1);
   const [currentShelfIndex, setCurrentShelfIndex] = useState(0);
@@ -191,6 +191,7 @@ const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
     if (!mockUserData) return;
     console.log(mockUserData.chemicals);
   }, [mockUserData]);
+
 
   if (!mockUserData) return null;
 

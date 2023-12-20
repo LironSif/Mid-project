@@ -8,10 +8,9 @@
     justify-content: center;
     align-items: center;
     height: 70vh;
-    width:30vw;
-    border: 2px solid green;
+    width: 50vw;
 }
-/* 
+
 .grid-div-shelf {
     position: absolute; 
     top: 20; 
@@ -21,11 +20,4 @@
     grid-row-gap: 20px;
     grid-column-gap: 10px;
     margin-bottom: 5vh;
-} */
-.grid-div-in{
-    position: relative;
-
-    left: 25%;
-    width: 50%;
-    border: 2px solid blue;
 }

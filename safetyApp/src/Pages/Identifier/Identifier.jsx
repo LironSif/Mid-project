@@ -10,7 +10,6 @@ import GasIcon from "@mui/icons-material/Cloud";
 import LiquidIcon from "@mui/icons-material/Opacity";
 import SolidIcon from "@mui/icons-material/Drafts";
 
-
 const ChemicalCard = ({ card, onRemove }) => {
   const cardStyle = {
     width: "95%",
@@ -28,7 +27,7 @@ const ChemicalCard = ({ card, onRemove }) => {
 
   return (
     <div style={cardStyle}>
-      <Typography variant="body1">{card.title}</Typography>
+      <Typography variant="body1">{card.Name}</Typography>
       <Typography variant="body2">{card.quantity ?` quantity ${card.quantity}` : 0}</Typography>
       <IconButton size="small" onClick={() => onRemove(card.id)}>
         <CloseIcon fontSize="small" />
@@ -46,7 +45,8 @@ const Identifier = () => {
   
   useEffect(() => {
     if (!mockUserData) return;
-    console.log("Chemicals in mockUserData:", mockUserData.chemicals); // Debugging
+    console.log("Chemicals in mockUserData:", mockUserData.chemicals);  
+    console.log(" crads are:", cards);  
     setCards(mockUserData.chemicals);
   }, [mockUserData]);
 

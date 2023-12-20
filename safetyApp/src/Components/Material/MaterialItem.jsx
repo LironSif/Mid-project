@@ -9,7 +9,7 @@ import "./MaterialItem.css";
 const MaterialItem = ({ type, label, state, quantity }) => {
   const [{ isDragging }, dragRef] = useDrag(() => ({
     type: 'MATERIAL_ITEM',
-    item: { type },
+    item: { type, label, state, quantity },
     collect: monitor => ({
       isDragging: !!monitor.isDragging(),
     }),
