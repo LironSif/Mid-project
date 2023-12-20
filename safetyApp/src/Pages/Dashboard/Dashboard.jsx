@@ -17,25 +17,23 @@ import {
 import FlameIcon from "@mui/icons-material/Whatshot";
 import CorrosiveIcon from "@mui/icons-material/Warning";
 import OxidizerIcon from "@mui/icons-material/AcUnit";
-import GasIcon from "@mui/icons-material/Cloud"; 
+import GasIcon from "@mui/icons-material/Cloud";
 import LiquidIcon from "@mui/icons-material/Opacity";
 import SolidIcon from "@mui/icons-material/Drafts";
 import MaterialItem from "../../Components/Material/MaterialItem.jsx";
 import Shelf from "../../Components/Shelf/Shelf.jsx";
 import { useUserData } from "../../UserDataContext.jsx";
 import CircularGauge from "../../Components/Gauge/CircularGauge.jsx";
-import { useTheme, useMediaQuery } from '@mui/material';
-
+import { useTheme, useMediaQuery } from "@mui/material";
 
 const Dashboard = () => {
-
   const [cards, setCards] = useState({});
   const [numberOfShelves, setNumberOfShelves] = useState(1);
   const [currentShelfIndex, setCurrentShelfIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentItem, setCurrentItem] = useState(null);
   const theme = useTheme();
-const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
   const { mockUserData, updateApiUserChemicals, updateShelfConfig } =
     useUserData();
@@ -88,13 +86,13 @@ const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
     updatedChemicals[currentItem.id].quantity -= selectedQuantity;
 
     // Update the shelf configuration
-    updateShelfConfig(
-      `shelf-${currentShelfIndex}`,
-      currentItem.Name,
-      selectedQuantity
-    );
+    // updateShelfConfig(
+    //   `shelf-${currentShelfIndex}`,
+    //   currentItem.Name,
+    //   selectedQuantity
+    // );
 
-    // Update the entire mockUserData and synchronize with the backend
+    // Update the entire mockUserData 
     let updatedMockUserData = {
       ...mockUserData,
       chemicals: updatedChemicals,
@@ -102,7 +100,7 @@ const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
     updateApiUserChemicals(updatedMockUserData);
     setIsModalOpen(false);
-    setCurrentItem(null); // Reset the currentItem
+    setCurrentItem(null); 
   };
 
   const handleShelfChange = (event, newValue) => {
@@ -191,7 +189,6 @@ const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
     if (!mockUserData) return;
     console.log(mockUserData.chemicals);
   }, [mockUserData]);
-
 
   if (!mockUserData) return null;
 
@@ -289,12 +286,12 @@ const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
           </Box>
         </Box>
 
-        {/* Combined Section 3 and 4: Material Items and Shelves */}
+        {/*  Section 3 and 4: Material Items and Shelves */}
         <Box
           sx={{
             display: "flex",
             flexDirection: "column",
-            alignItems: "center",
+            alignItems: "flex-start",
             justifyContent: "center",
             gap: 2,
           }}
@@ -303,7 +300,12 @@ const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
             Material organizer
           </Typography>
           <Box
-            sx={{ display: "flex",flexDirection: isSmallScreen ? 'column' : 'row',justifyContent: "space-between", gap: 2 }}
+            sx={{
+              display: "flex",
+              flexDirection: isSmallScreen ? "column" : "row",
+              justifyContent: "space-between",
+              gap: 2,
+            }}
           >
             <div className="material-list">
               {Object.values(mockUserData.chemicals).map((el, i) => (

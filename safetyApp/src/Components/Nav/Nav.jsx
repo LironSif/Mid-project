@@ -19,13 +19,21 @@ const Nav = () => {
 
   const buttonStyle = {
     color: 'inherit',
+    marginRight:3,
     component: NavLink,
     sx: {
+      marginRight: 2,
       ':hover': {
         borderColor: 'white',
         borderWidth: '1px',
         borderStyle: 'solid',
         borderRadius: '1px'
+      },
+      '&.active': {
+        backgroundColor: 'white',
+        color: theme.palette.primary.main, 
+        borderRadius:"5px",
+        
       }
     }
   };
@@ -36,7 +44,7 @@ const Nav = () => {
       borderRadius:"10px",
       color:"white",
       ':hover': {
-        backgroundColor: theme.palette.primary.dark, // Darker shade on hover
+        backgroundColor: theme.palette.primary.dark, 
         borderColor: 'white',
         borderWidth: '1px',
         borderStyle: 'solid',
